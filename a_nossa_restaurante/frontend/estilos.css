@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* HIGH CONTRAST MODE (WCAG AAA) */
+        body.high-contrast {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+        }
+
+        body.high-contrast *,
+        body.high-contrast header,
+        body.high-contrast div,
+        body.high-contrast section,
+        body.high-contrast nav,
+        body.high-contrast footer,
+        body.high-contrast modal {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+            border-color: #ffff00 !important;
+            box-shadow: none !important;
+            text-shadow: none !important;
+        }
+
+        body.high-contrast button,
+        body.high-contrast input,
+        body.high-contrast select,
+        body.high-contrast textarea {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+            border: 2px solid #ffff00 !important;
+            font-weight: 800 !important;
+        }
+
+        body.high-contrast button:hover,
+        body.high-contrast button:focus {
+            background-color: #ffff00 !important;
+            color: #000000 !important;
+            outline: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .badge-tag {
+            background-color: #ffff00 !important;
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+
+        body.high-contrast .status-dot {
+            background-color: #ffff00 !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .animate-slide-right {
+            animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }

@@ -1,0 +1,14 @@
+{
+  "name": "backend-a-nossa-restaurante",
+  "version": "1.0.0",
+  "description": "API do site A Nossa Restaurante",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

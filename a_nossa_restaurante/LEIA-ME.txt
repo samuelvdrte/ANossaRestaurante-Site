@@ -1,0 +1,30 @@
+# A Nossa Restaurante — Frontend e Backend separados
+
+O frontend foi separado do HTML original sem redesenhar a página:
+- `frontend/index.html`: estrutura original
+- `frontend/estilos.css`: CSS original
+- `frontend/script.js`: JavaScript original, com as mesmas funções e comportamento
+
+O backend fica em `backend/` e oferece uma API REST para produtos e pedidos.
+
+## Como abrir o frontend
+Abra `frontend/index.html` com a extensão Live Server do VS Code.
+
+## Como iniciar o backend
+No terminal do VS Code:
+```bash
+cd backend
+npm install
+npm start
+```
+O servidor ficará em `http://localhost:3000`.
+
+## Testar a API
+- `http://localhost:3000/`
+- `http://localhost:3000/api/produtos`
+- `http://localhost:3000/api/pedidos`
+
+Rotas de produtos: GET, GET por ID, POST, PUT e DELETE.
+Rotas de pedidos: GET e POST.
+
+**Observação importante:** para preservar exatamente as funcionalidades originais do site, o JavaScript original continua usando `localStorage` para carrinho, histórico e gerenciamento de produtos no navegador. A API está separada e funcional, mas a tela ainda não foi conectada às rotas de CRUD; isso pode ser feito como uma etapa seguinte sem alterar o design.

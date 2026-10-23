@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Prato Executivo Frango Grelhado",
+    "description": "File de frango grelhado suculento, arroz branco soltinho, feijao carioca, batata frita e salada da casa.",
+    "price": 28.9,
+    "category": "Promocao do dia",
+    "image": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=400&q=80",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "Marmita G - Bife Acebolado",
+    "description": "Bife de alcatra macio com cebolas douradas, arroz, feijao preto e farofa artesanal temperada.",
+    "price": 32.0,
+    "category": "Cardapio normal",
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "Strogonoff de Frango Especial",
+    "description": "Strogonoff cremoso com peito de frango em cubos, cogumelos, arroz e batata palha super crocante.",
+    "price": 29.9,
+    "category": "Promocao do dia",
+    "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=400&q=80",
+    "available": true
+  },
+  {
+    "id": 4,
+    "name": "Feijoada Completa Individual",
+    "description": "Feijoada tradicional rica em carnes nobres, acompanhada de couve refogada, farofa, arroz e laranja.",
+    "price": 38.5,
+    "category": "Cardapio normal",
+    "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80",
+    "available": true
+  },
+  {
+    "id": 5,
+    "name": "Suco Natural Laranja 500ml",
+    "description": "Suco 100% natural espremido na hora, sem adicao de agua ou acucar.",
+    "price": 9.5,
+    "category": "Bebidas",
+    "image": "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=400&q=80",
+    "available": true
+  },
+  {
+    "id": 6,
+    "name": "Refrigerante Lata 350ml",
+    "description": "Lata bem gelada. Opcoes: Coca-Cola, Guaraná Antarctica ou Fanta.",
+    "price": 6.5,
+    "category": "Bebidas",
+    "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=400&q=80",
+    "available": true
+  },
+  {
+    "id": 7,
+    "name": "Pudim de Leite Condensado",
+    "description": "Fatia generosa de pudim super cremoso com calda de caramelo caseira.",
+    "price": 11.0,
+    "category": "Sobremesas",
+    "image": "https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?auto=format&fit=crop&w=400&q=80",
+    "available": true
+  },
+  {
+    "id": 8,
+    "name": "Mousse de Maracuja Artesanal",
+    "description": "Mousse leve e aerado com calda natural de maracuja e sementes crocantes.",
+    "price": 10.0,
+    "category": "Sobremesas",
+    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80",
+    "available": true
+  }
+]

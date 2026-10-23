@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Nossa Restaurante - Delivery Online</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#e63946',
+                            600: '#c52833',
+                            700: '#9e1c24',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="estilos.css">
+
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-950 dark:text-gray-100 min-h-full flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- TOAST NOTIFICATIONS CONTAINER -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+    <!-- HEADER STICKY -->
+    <header class="sticky top-0 z-30 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Logo & Store Info -->
+            <div class="flex items-center gap-3">
+                <div class="relative group cursor-pointer" onclick="switchCategory('Promocao do dia')">
+                    <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand-500/20 ring-2 ring-brand-500/30">
+                        AN
+                    </div>
+                    <span class="status-dot absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white dark:border-gray-900 rounded-full"></span>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-extrabold tracking-tight leading-tight text-gray-900 dark:text-white">
+                        A Nossa Restaurante
+                    </h1>
+                    <div class="flex items-center gap-2 mt-0.5">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Aberto para pedidos
+                        </span>
+                        <span class="text-gray-300 dark:text-gray-700">•</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Entrega 30-45 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header Actions Navigation -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                
+                <!-- Contrast Toggle Button -->
+                <button id="btn-contrast" onclick="toggleHighContrast()" title="Modo Alto Contraste (Acessibilidade)" class="p-2 sm:px-3 sm:py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-bold hover:border-brand-500 hover:text-brand-500 transition-all flex items-center gap-1.5 bg-gray-50 dark:bg-gray-800">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m0-18a9 9 0 000 1812-18z"/></svg>
+                    <span class="hidden md:inline">Contraste</span>
+                </button>
+
+                <!-- Dark Mode Toggle Button -->
+                <button id="btn-darkmode" onclick="toggleDarkMode()" title="Alternar Modo Noturno" class="p-2 sm:px-3 sm:py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-bold hover:border-brand-500 hover:text-brand-500 transition-all flex items-center gap-1.5 bg-gray-50 dark:bg-gray-800">
+                    <svg id="sun-icon" class="w-4 h-4 hidden dark:block text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z"/></svg>
+                    <svg id="moon-icon" class="w-4 h-4 block dark:hidden text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                    <span class="hidden md:inline dark:hidden">Escuro</span>
+                    <span class="hidden dark:md:inline">Claro</span>
+                </button>
+
+                <!-- Admin Login Button -->
+                <button id="btn-admin" onclick="openAdminModal()" class="p-2 sm:px-3 sm:py-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 text-xs font-bold transition-all flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <span>Admin</span>
+                </button>
+
+                <!-- Cart Toggle Button -->
+                <button onclick="toggleCartModal(true)" class="relative p-2.5 sm:px-4 sm:py-2 rounded-xl bg-brand-500 hover:bg-brand-600 active:scale-95 text-white font-bold text-sm shadow-lg shadow-brand-500/25 transition-all flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+                    <span class="hidden sm:inline">Carrinho</span>
+                    <span id="cart-badge" class="bg-white text-brand-600 text-xs font-extrabold px-2 py-0.5 rounded-full shadow-inner">0</span>
+                </button>
+
+            </div>
+        </div>
+    </header>
+
+    <main id="app-main" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- HERO BANNER -->
+        <section class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-brand-600 via-brand-500 to-amber-500 text-white p-6 sm:p-10 shadow-2xl shadow-brand-500/10">
+            <div class="relative z-10 max-w-2xl space-y-3">
+                <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-wider">
+                    Sabor Caseiro & Entrega Rápida
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
+                    Comida de verdade, feita com carinho todos os dias.
+                </h2>
+                <p class="text-sm sm:text-base text-white/90 font-medium leading-relaxed">
+                    Escolha suas opções favoritas do cardápio ou monte seu prato personalizado em poucos cliques.
+                </p>
+            </div>
+            <!-- Decorative Background Element -->
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+        </section>
+
+        <!-- CATEGORY NAVIGATION TABS -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-black text-gray-900 dark:text-white tracking-tight">
+                    Nosso Cardápio
+                </h3>
+                <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">
+                    Selecione uma categoria
+                </span>
+            </div>
+
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-gray-200 dark:border-gray-800">
+                <button onclick="switchCategory('Promocao do dia')" class="tab-btn active px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-brand-500 text-white shadow-md shadow-brand-500/20" data-cat="Promocao do dia">
+                    🔥 Promoção do dia
+                </button>
+                <button onclick="switchCategory('Cardapio normal')" class="tab-btn px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-brand-500" data-cat="Cardapio normal">
+                    🍲 Cardápio normal
+                </button>
+                <button onclick="switchCategory('Bebidas')" class="tab-btn px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-brand-500" data-cat="Bebidas">
+                    🥤 Bebidas
+                </button>
+                <button onclick="switchCategory('Sobremesas')" class="tab-btn px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-brand-500" data-cat="Sobremesas">
+                    🍰 Sobremesas
+                </button>
+                <button onclick="switchCategory('Monte o seu prato')" class="tab-btn px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-brand-500" data-cat="Monte o seu prato">
+                    ✨ Monte o seu prato
+                </button>
+            </div>
+        </section>
+
+        <!-- PRODUCTS GRID CONTAINER -->
+        <section id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-fade-in">
+            <!-- Dynamic products injected here -->
+        </section>
+
+        <!-- CUSTOM MEAL BUILDER SECTION (Shown when "Monte o seu prato" tab is active) -->
+        <section id="custom-meal-section" class="hidden animate-fade-in">
+            <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 border border-gray-200 dark:border-gray-800 shadow-xl space-y-6 max-w-4xl mx-auto">
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-gray-800 pb-6">
+                    <div>
+                        <span class="badge-tag inline-block px-3 py-1 bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 font-extrabold text-xs rounded-lg uppercase tracking-wider mb-2">
+                            Monte seu Almoço
+                        </span>
+                        <h3 class="text-2xl font-black text-gray-900 dark:text-white">
+                            Monte o seu prato perfeito
+                        </h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                            Escolha os acompanhamentos do seu jeito e adicione ao carrinho.
+                        </p>
+                    </div>
+                    <div class="bg-brand-50 dark:bg-gray-800 p-4 rounded-2xl text-right sm:text-right border border-brand-100 dark:border-gray-700">
+                        <span class="text-xs font-bold text-gray-500 dark:text-gray-400 block">Preço do Prato</span>
+                        <span id="custom-meal-price" class="text-2xl font-black text-brand-600 dark:text-brand-400">R$ 27,90</span>
+                    </div>
+                </div>
+
+                <form id="custom-meal-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Arroz -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">1. Tipo de Arroz</label>
+                            <select id="cm-arroz" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                <option value="Arroz Branco">Arroz Branco Soltinho</option>
+                                <option value="Arroz Integral">Arroz Integral Nutritivo</option>
+                                <option value="Sem Arroz">Sem Arroz</option>
+                            </select>
+                        </div>
+
+                        <!-- Feijão -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">2. Tipo de Feijão</label>
+                            <select id="cm-feijao" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                <option value="Feijão Carioca">Feijão Carioca Caseiro</option>
+                                <option value="Feijão Preto">Feijão Preto Temperado</option>
+                                <option value="Sem Feijão">Sem Feijão</option>
+                            </select>
+                        </div>
+
+                        <!-- Proteína -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">3. Proteína Principal</label>
+                            <select id="cm-proteina" onchange="calculateCustomMealPrice()" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                <option value="Frango Grelhado" data-price="0">Frango Grelhado Suculento</option>
+                                <option value="Carne Assada" data-price="0">Carne Assada ao Molho Madeiras</option>
+                                <option value="Filé de Peixe Empanado" data-price="6.00">Filé de Peixe Empanado (+ R$ 6,00)</option>
+                                <option value="Omelete Especial" data-price="0">Omelete com Queijo e Ervas</option>
+                            </select>
+                        </div>
+
+                        <!-- Guarnição -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">4. Guarnição</label>
+                            <select id="cm-guarnicao" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                <option value="Batata Frita">Batata Frita Crocante</option>
+                                <option value="Legumes no Vapor">Legumes no Vapor</option>
+                                <option value="Mandioca Frita">Mandioca Frita Dourada</option>
+                                <option value="Farofa da Casa">Farofa Especial da Casa</option>
+                            </select>
+                        </div>
+
+                        <!-- Salada -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">5. Salada</label>
+                            <select id="cm-salada" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                <option value="Salada Completa">Salada Completa (Alface, Tomate, Cenoura)</option>
+                                <option value="Apenas Alface e Tomate">Apenas Alface e Tomate</option>
+                                <option value="Sem Salada">Sem Salada</option>
+                            </select>
+                        </div>
+
+                        <!-- Extra -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">6. Adicional Extra</label>
+                            <select id="cm-extra" onchange="calculateCustomMealPrice()" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                <option value="Sem Extra" data-price="0">Nenhum adicional</option>
+                                <option value="Porção Extra de Proteína" data-price="8.00">Porção Extra de Proteína (+ R$ 8,00)</option>
+                                <option value="Ovo Frito Duplo" data-price="4.00">Ovo Frito Duplo (+ R$ 4,00)</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Observação -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">Observações Especiais do Prato</label>
+                        <textarea id="cm-obs" rows="2" placeholder="Ex: Molho da carne separado, feijão por baixo do arroz..." class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none resize-none"></textarea>
+                    </div>
+
+                    <button type="button" onclick="addCustomMealToCart()" class="w-full py-4 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-base shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                        Adicionar Prato Personalizado ao Pedido
+                    </button>
+                </form>
+
+            </div>
+        </section>
+
+        <!-- RECENT ORDERS HISTORY SECTION -->
+        <section class="border-t border-gray-200 dark:border-gray-800 pt-8 space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-black text-gray-900 dark:text-white tracking-tight">
+                        Seus Pedidos Recentes
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                        Histórico dos últimos pedidos realizados neste navegador
+                    </p>
+                </div>
+                <button onclick="clearOrderHistory()" class="text-xs font-bold text-red-500 hover:underline">
+                    Limpar Histórico
+                </button>
+            </div>
+
+            <div id="order-history-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Order cards injected here -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ADMIN PANEL VIEW (Hidden by default) -->
+    <main id="app-admin" class="hidden flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-800 pb-6">
+            <div>
+                <span class="badge-tag inline-block px-3 py-1 bg-brand-100 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 font-extrabold text-xs rounded-lg uppercase tracking-wider mb-1">
+                    Painel Administrativo
+                </span>
+                <h2 class="text-3xl font-black text-gray-900 dark:text-white">Gerenciar Cardápio</h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="closeAdminPanel()" class="px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 font-bold text-xs hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                    Voltar ao Cardápio
+                </button>
+                <button onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl bg-red-100 text-red-600 dark:bg-red-950/50 dark:text-red-400 font-bold text-xs hover:bg-red-200 transition-all">
+                    Sair Admin
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Product Form Card -->
+            <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 border border-gray-200 dark:border-gray-800 shadow-xl space-y-4 h-fit">
+                <h3 id="admin-form-title" class="text-lg font-black text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-800 pb-3">
+                    Cadastrar Novo Produto
+                </h3>
+                <form id="admin-product-form" onsubmit="handleProductSubmit(event)" class="space-y-4">
+                    <input type="hidden" id="admin-p-id">
+                    
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Nome do Produto *</label>
+                        <input type="text" id="admin-p-name" required placeholder="Ex: X-Salada Especial" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Descrição *</label>
+                        <textarea id="admin-p-desc" required rows="2" placeholder="Ingredientes e detalhes..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none resize-none"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="space-y-1">
+                            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Preço (R$) *</label>
+                            <input type="number" step="0.01" id="admin-p-price" required placeholder="29.90" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Categoria *</label>
+                            <select id="admin-p-category" required class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                <option value="Promocao do dia">Promoção do dia</option>
+                                <option value="Cardapio normal">Cardápio normal</option>
+                                <option value="Bebidas">Bebidas</option>
+                                <option value="Sobremesas">Sobremesas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">URL da Imagem</label>
+                        <input type="url" id="admin-p-image" placeholder="https://..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2">
+                        <input type="checkbox" id="admin-p-available" checked class="w-4 h-4 text-brand-500 rounded focus:ring-brand-500">
+                        <label for="admin-p-available" class="text-xs font-bold text-gray-700 dark:text-gray-300 cursor-pointer">Disponível para Venda</label>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-3">
+                        <button type="submit" class="flex-1 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-xl font-bold text-xs transition-all">
+                            Salvar Produto
+                        </button>
+                        <button type="button" onclick="clearAdminForm()" class="px-4 py-3 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-bold text-xs hover:bg-gray-300 transition-all">
+                            Limpar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Products Table / List -->
+            <div class="lg:col-span-2 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-black text-gray-900 dark:text-white">Produtos Cadastrados</h3>
+                    <span id="admin-count" class="text-xs font-bold text-gray-500">0 itens</span>
+                </div>
+                <div id="admin-products-container" class="space-y-3">
+                    <!-- Admin product list items injected here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- CART SIDEBAR MODAL -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden">
+        <!-- Backdrop -->
+        <div onclick="toggleCartModal(false)" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+        <!-- Drawer Panel -->
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white dark:bg-gray-900 shadow-2xl flex flex-col animate-slide-right">
+            
+            <!-- Header -->
+            <div class="p-5 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+                    <h3 class="text-lg font-black text-gray-900 dark:text-white">Meu Carrinho</h3>
+                </div>
+                <button onclick="toggleCartModal(false)" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cart-items-container" class="flex-grow p-5 overflow-y-auto space-y-4">
+                <!-- Cart items injected here -->
+            </div>
+
+            <!-- Footer Total & Checkout Button -->
+            <div class="p-5 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 space-y-4">
+                <div class="flex items-center justify-between text-base font-extrabold">
+                    <span class="text-gray-600 dark:text-gray-400">Total do Pedido:</span>
+                    <span id="cart-total-price" class="text-2xl font-black text-brand-600 dark:text-brand-400">R$ 0,00</span>
+                </div>
+                <button onclick="openCheckoutModal()" class="w-full py-4 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-base shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
+                    <span>Próximo Passo: Entrega</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- QUANTITY SELECTION MODAL -->
+    <div id="qty-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeQtyModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white dark:bg-gray-900 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-6 text-center animate-fade-in border border-gray-200 dark:border-gray-800">
+            <h4 id="qty-product-name" class="text-lg font-black text-gray-900 dark:text-white">Nome do Produto</h4>
+            <p id="qty-product-price" class="text-xl font-extrabold text-brand-600 dark:text-brand-400">R$ 0,00</p>
+            
+            <div class="flex items-center justify-center gap-4 py-2">
+                <button onclick="adjustQtyModal(-1)" class="w-12 h-12 rounded-2xl border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center text-xl font-black hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                    -
+                </button>
+                <span id="qty-modal-value" class="text-2xl font-black w-12">1</span>
+                <button onclick="adjustQtyModal(1)" class="w-12 h-12 rounded-2xl border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center text-xl font-black hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                    +
+                </button>
+            </div>
+
+            <div class="space-y-2">
+                <button onclick="confirmAddToCart()" class="w-full py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm shadow-md transition-all">
+                    Adicionar ao Pedido
+                </button>
+                <button onclick="closeQtyModal()" class="w-full py-2.5 text-xs font-bold text-gray-500 hover:underline">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT DELIVERY MODAL -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeCheckoutModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-6 animate-fade-in border border-gray-200 dark:border-gray-800 max-h-[90vh] overflow-y-auto">
+            
+            <div class="border-b border-gray-100 dark:border-gray-800 pb-4">
+                <span class="badge-tag inline-block px-3 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 font-extrabold text-xs rounded-lg uppercase tracking-wider mb-1">
+                    Finalização
+                </span>
+                <h3 class="text-2xl font-black text-gray-900 dark:text-white">Dados para Entrega</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Preencha os dados para enviar o pedido via WhatsApp.</p>
+            </div>
+
+            <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Seu Nome Completo *</label>
+                    <input type="text" id="chk-name" required placeholder="Ex: Maria Silva" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Endereço Completo (Rua, Nº, Bairro, Complemento) *</label>
+                    <input type="text" id="chk-address" required placeholder="Ex: Av. Brasil, 123 - Apto 402, Centro" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Forma de Pagamento *</label>
+                    <select id="chk-payment" required class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        <option value="">Selecione a forma de pagamento...</option>
+                        <option value="PIX">PIX (Chave enviada na conversa)</option>
+                        <option value="Cartão de Crédito/Débito">Cartão de Crédito/Débito (Levaremos a maquininha)</option>
+                        <option value="Dinheiro">Dinheiro (Troco necessário? Especificar nas obs)</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Observações Gerais do Pedido</label>
+                    <textarea id="chk-obs" rows="2" placeholder="Ex: Troco para R$ 50, entregar sem tocar a campainha..." class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none resize-none"></textarea>
+                </div>
+
+                <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-between text-sm">
+                    <span class="font-bold text-emerald-800 dark:text-emerald-300">Total a Pagar:</span>
+                    <span id="chk-total-display" class="font-black text-xl text-emerald-600 dark:text-emerald-400">R$ 0,00</span>
+                </div>
+
+                <div class="flex items-center gap-3 pt-2">
+                    <button type="button" onclick="closeCheckoutModal()" class="w-1/3 py-3.5 rounded-xl border border-gray-300 dark:border-gray-700 font-bold text-xs hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                        Voltar
+                    </button>
+                    <button type="submit" class="w-2/3 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2">
+                        <span>Enviar no WhatsApp</span>
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeAdminLoginModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl space-y-6 animate-fade-in border border-gray-200 dark:border-gray-800">
+            <div class="text-center space-y-2">
+                <span class="badge-tag inline-block px-3 py-1 bg-red-100 text-red-600 font-extrabold text-xs rounded-lg uppercase tracking-wider">
+                    Restrito
+                </span>
+                <h3 class="text-2xl font-black text-gray-900 dark:text-white">Acesso Admin</h3>
+                <p class="text-xs text-gray-500">Credenciais padrão: admin / admin123</p>
+            </div>
+
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Usuário</label>
+                    <input type="text" id="admin-user-input" required value="admin" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Senha</label>
+                    <input type="password" id="admin-pass-input" required value="admin123" class="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                </div>
+
+                <div class="space-y-2 pt-2">
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm shadow-md transition-all">
+                        Entrar no Painel
+                    </button>
+                    <button type="button" onclick="closeAdminLoginModal()" class="w-full py-2.5 text-xs font-bold text-gray-500 hover:underline">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CUSTOM CONFIRM MODAL (NO BROWSER ALERT/CONFIRM) -->
+    <div id="confirm-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white dark:bg-gray-900 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-center animate-fade-in border border-gray-200 dark:border-gray-800">
+            <h4 id="confirm-title" class="text-lg font-black text-gray-900 dark:text-white">Confirmação</h4>
+            <p id="confirm-message" class="text-sm text-gray-500 dark:text-gray-400">Tem certeza?</p>
+            <div class="flex items-center gap-3 pt-2">
+                <button id="confirm-btn-no" class="w-1/2 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 font-bold text-xs hover:bg-gray-100 dark:hover:bg-gray-800">
+                    Não
+                </button>
+                <button id="confirm-btn-yes" class="w-1/2 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md">
+                    Sim, Continuar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script src="script.js" defer></script>
+</body>
+</html>
