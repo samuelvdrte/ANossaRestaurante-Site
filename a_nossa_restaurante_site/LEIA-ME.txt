@@ -1,0 +1,26 @@
+==================================================
+A NOSSA RESTAURANTE - DELIVERY & ADMIN (PRO VERSION)
+==================================================
+
+ESTRUTURA DO PROJETO:
+- frontend/ : Interface moderna, responsiva, com suporte a temas (Escuro e Alto Contraste),
+              carrinho de compras, personalização de pratos, histórico de pedidos com reordenamento,
+              opções vegetarianas/alergênicos e Painel de Administração completo.
+- backend/  : API RESTful em Node.js / Express para gestão de produtos e pedidos.
+
+COMO EXECUTAR O PROJETO:
+
+1. INICIAR O BACKEND (API Express):
+   $ cd backend
+   $ npm install
+   $ npm start
+   -> Servidor ativo em: http://localhost:3000
+
+2. ABRIR O FRONTEND:
+   Navegue até a pasta `frontend` e abra o arquivo `index.html` diretamente no seu navegador
+   ou utilize a extensão 'Live Server' no VS Code.
+
+CREDENCIAIS DO ADMIN:
+- Usuário: admin
+- Senha:   admin123
+==================================================

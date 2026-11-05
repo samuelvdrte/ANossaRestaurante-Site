@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Nossa Restaurante - Delivery & Cardápio Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!-- NOTIFICAÇÃO TOAST FLUTUANTE -->
+    <div id="toast-notification" class="toast hidden" role="alert" aria-live="polite"></div>
+
+    <!-- CABEÇALHO PRINCIPAL -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="logo-icon">🍽️</div>
+                <div class="store-info">
+                    <h1>A Nossa Restaurante</h1>
+                    <span class="status-badge"><span class="status-dot"></span> Aberto para pedidos</span>
+                </div>
+            </div>
+            
+            <nav class="header-nav">
+                <button id="btn-contrast" class="nav-btn" title="Ativar modo alto contraste">👁️ Contraste</button>
+                <button id="btn-darkmode" class="nav-btn" title="Alternar tema escuro/claro">🌙 Noturno</button>
+                <button id="btn-admin" class="nav-btn btn-outline-admin">⚙️ Admin</button>
+                <button id="btn-cart-toggle" class="cart-btn" aria-label="Abrir carrinho de compras">
+                    🛒 Carrinho <span id="cart-count">0</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ÁREA PRINCIPAL DO CLIENTE -->
+    <main id="main-content" class="container">
+        <!-- BANNER DE BOAS-VINDAS -->
+        <section class="hero-banner">
+            <div class="hero-badge">DELIVERY ONLINE & RÁPIDO</div>
+            <h2>Comida caseira feita com carinho e sabor único</h2>
+            <p>Faça seu pedido diretamente pelo nosso site e receba quentinho no WhatsApp.</p>
+        </section>
+
+        <!-- NAVEGAÇÃO POR ABAS -->
+        <div class="menu-tabs" role="tablist">
+            <button class="tab-btn active" data-category="Promoção do dia" role="tab">🔥 Promoção do Dia</button>
+            <button class="tab-btn" data-category="Cardápio normal" role="tab">🍛 Cardápio Tradicional</button>
+            <button class="tab-btn" data-category="Bebidas" role="tab">🥤 Bebidas</button>
+            <button class="tab-btn" data-category="Sobremesas" role="tab">🍰 Sobremesas</button>
+            <button class="tab-btn btn-highlight-tab" data-category="Monte o seu prato" role="tab">✨ Monte o Seu Prato</button>
+        </div>
+
+        <!-- GRID DE PRODUTOS -->
+        <div id="products-container" class="products-grid">
+            <!-- Renderizado dinamicamente via JavaScript -->
+        </div>
+
+        <!-- SEÇÃO PERSONALIZADA: MONTE O SEU PRATO -->
+        <div id="custom-meal-section" class="custom-meal-card hidden">
+            <div class="custom-header">
+                <span class="badge-custom">Monte Sua Marmita</span>
+                <h3>Escolha os seus ingredientes favoritos</h3>
+                <p>Monte o seu almoço sob medida. Selecione as opções abaixo:</p>
+                <span id="custom-price-display" class="custom-price">R$ 27,90</span>
+            </div>
+
+            <form id="custom-meal-form" class="custom-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="custom-arroz">Base de Arroz</label>
+                        <select id="custom-arroz">
+                            <option value="Arroz branco soltinho">Arroz branco soltinho</option>
+                            <option value="Arroz integral caseiro">Arroz integral caseiro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="custom-feijao">Feijão</label>
+                        <select id="custom-feijao">
+                            <option value="Feijão carioca temperado">Feijão carioca temperado</option>
+                            <option value="Feijão preto bem gordinho">Feijão preto bem gordinho</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="custom-proteina">Proteína Principal</label>
+                        <select id="custom-proteina">
+                            <option value="Frango grelhado">Frango grelhado na chapa</option>
+                            <option value="Carne assada sucullenta">Carne assada sucullenta</option>
+                            <option value="Filé de peixe empanado (+R$ 6,00)" data-extra="6">Filé de peixe empanado (+R$ 6,00)</option>
+                            <option value="Omelete recheada (Vegetariano)">Omelete recheada (Vegetariano)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="custom-guarnicao">Guarnição</label>
+                        <select id="custom-guarnicao">
+                            <option value="Batata frita crocante">Batata frita crocante</option>
+                            <option value="Legumes grelhados na manteiga">Legumes grelhados na manteiga</option>
+                            <option value="Mandioca frita">Mandioca frita</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="custom-salada">Salada</label>
+                        <select id="custom-salada">
+                            <option value="Salada completa do dia">Salada completa do dia</option>
+                            <option value="Sem salada">Sem salada</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="custom-extra">Item Extra</label>
+                        <select id="custom-extra">
+                            <option value="Sem extra">Sem extra</option>
+                            <option value="Porção extra de proteína (+R$ 8,00)" data-extra="8">Porção extra de proteína (+R$ 8,00)</option>
+                            <option value="Ovo frito (+R$ 3,00)" data-extra="3">Ovo frito (+R$ 3,00)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="custom-obs">Observações Especiais</label>
+                    <textarea id="custom-obs" placeholder="Ex: Ponto da carne, molho à parte, pouca salada..."></textarea>
+                </div>
+
+                <button type="button" id="btn-add-custom" class="btn-primary-full">🛒 Adicionar Prato Personalizado</button>
+            </form>
+        </div>
+
+        <!-- SEÇÃO HISTÓRICO DE PEDIDOS RECENTES -->
+        <section class="orders-history-section">
+            <div class="section-title-wrap">
+                <h3>📜 Seus Últimos Pedidos</h3>
+                <p>Repita seus pedidos favoritos com apenas um clique!</p>
+            </div>
+            <div id="orders-history-container" class="orders-history-grid">
+                <p class="empty-history">Nenhum pedido recente registrado neste navegador.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DO CARRINHO (SIDEBAR) -->
+    <div id="cart-modal" class="modal-overlay hidden">
+        <div class="cart-sidebar">
+            <div class="cart-header">
+                <h3>🛍️ Meu Carrinho</h3>
+                <button id="btn-close-cart" class="close-btn" aria-label="Fechar carrinho">&times;</button>
+            </div>
+            <div id="cart-items-container" class="cart-items">
+                <!-- Itens serão listados aqui -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total-row">
+                    <span>Total do Pedido:</span>
+                    <strong id="cart-total-value">R$ 0,00</strong>
+                </div>
+                <button id="btn-checkout-step" class="btn-primary-full">Avançar para Entrega ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CHECKOUT / DADOS DE ENTREGA -->
+    <div id="checkout-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3>📍 Finalizar Pedido</h3>
+            <p class="modal-sub">Informe os dados para entrega do seu pedido via WhatsApp.</p>
+            
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="client-name">Seu Nome Completo</label>
+                    <input type="text" id="client-name" required placeholder="Digite seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="client-address">Endereço de Entrega (Rua, Nº, Bairro, Complemento)</label>
+                    <input type="text" id="client-address" required placeholder="Ex: Rua das Flores, 123, Bairro Centro">
+                </div>
+                <div class="form-group">
+                    <label for="client-payment">Forma de Pagamento</label>
+                    <select id="client-payment" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="PIX">PIX (Chave enviada no WhatsApp)</option>
+                        <option value="Cartão de Crédito / Débito na entrega">Cartão de Crédito / Débito na entrega</option>
+                        <option value="Dinheiro (Levar troco)">Dinheiro (Informar troco nas observações)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="client-obs">Observações Finais</label>
+                    <textarea id="client-obs" placeholder="Ex: Trazer troco para R$ 50,00; Deixar na portaria..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="btn-back-cart" class="btn-secondary">⬅️ Voltar</button>
+                    <button type="submit" class="btn-primary">📲 Enviar Pedido via WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL SELEÇÃO DE QUANTIDADE DE PRODUTO -->
+    <div id="quantity-modal" class="modal-overlay hidden">
+        <div class="modal-card small-card">
+            <h3 id="qty-product-name">Nome do Produto</h3>
+            <p class="modal-sub">Selecione a quantidade desejada:</p>
+            <div class="qty-selector">
+                <button type="button" id="qty-minus" aria-label="Diminuir">-</button>
+                <span id="qty-value">1</span>
+                <button type="button" id="qty-plus" aria-label="Aumentar">+</button>
+            </div>
+            <button type="button" id="btn-confirm-add" class="btn-primary-full">Adicionar ao Carrinho</button>
+            <button type="button" id="btn-cancel-qty" class="btn-text">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE LOGIN DO PAINEL ADMIN -->
+    <div id="admin-login-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <span class="badge-restricted">ÁREA RESTRITA</span>
+            <h3>🔐 Login do Administrador</h3>
+            <p class="modal-sub">Acesse para cadastrar, editar ou gerenciar o cardápio.</p>
+            
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="admin-user">Usuário</label>
+                    <input type="text" id="admin-user" required placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label for="admin-pass">Senha</label>
+                    <input type="password" id="admin-pass" required placeholder="admin123">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Entrar no Painel</button>
+                    <button type="button" id="btn-close-admin-login" class="btn-secondary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PAINEL ADMINISTRATIVO RESTRITO -->
+    <div id="admin-panel" class="container hidden admin-container">
+        <div class="admin-top-bar">
+            <div>
+                <span class="admin-tag">PAINEL DE GERENCIAMENTO</span>
+                <h2>Gestão do Cardápio Digital</h2>
+            </div>
+            <div class="admin-nav-actions">
+                <button id="btn-admin-back" class="btn-secondary">⬅️ Voltar ao Cardápio</button>
+                <button id="btn-admin-logout" class="btn-danger-outline">🚪 Sair</button>
+            </div>
+        </div>
+
+        <div class="admin-grid-layout">
+            <!-- Formulário de cadastro / edição -->
+            <div class="admin-form-card">
+                <h3 id="admin-form-title">Cadastrar Novo Produto</h3>
+                <form id="product-form">
+                    <input type="hidden" id="edit-product-id">
+                    
+                    <div class="form-group">
+                        <label for="p-name">Nome do Produto</label>
+                        <input type="text" id="p-name" required placeholder="Ex: Prato Executivo Bife Acebolado">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="p-desc">Descrição / Ingredientes</label>
+                        <textarea id="p-desc" required placeholder="Descreva os componentes do prato..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="p-price">Preço (R$)</label>
+                            <input type="number" step="0.01" id="p-price" required placeholder="0,00">
+                        </div>
+                        <div class="form-group">
+                            <label for="p-category">Categoria</label>
+                            <select id="p-category" required>
+                                <option value="Promoção do dia">Promoção do dia</option>
+                                <option value="Cardápio normal">Cardápio normal</option>
+                                <option value="Bebidas">Bebidas</option>
+                                <option value="Sobremesas">Sobremesas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="p-tag-destaque">Selo de Destaque</label>
+                            <select id="p-tag-destaque">
+                                <option value="">Nenhum</option>
+                                <option value="Mais vendido">Mais vendido</option>
+                                <option value="Promoção">Promoção</option>
+                                <option value="Especial">Especial</option>
+                                <option value="Vegetariano">Vegetariano</option>
+                                <option value="Vegetariano / Especial">Vegetariano / Especial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="p-restricoes">Informações de Alergênicos</label>
+                            <input type="text" id="p-restricoes" placeholder="Ex: Opção Vegetariana • Contém glúten">
+                        </div>
+                    </div>
+
+                    <!-- UPLOAD DE IMAGEM -->
+                    <div class="form-group">
+                        <label>Imagem do Produto</label>
+                        <div class="file-upload-box">
+                            <label for="p-file-input" class="btn-file-label">📁 Selecionar Arquivo</label>
+                            <input type="file" id="p-file-input" accept="image/*" class="file-input-hidden">
+                            <span id="file-name-display" class="file-name-text">Nenhum arquivo selecionado</span>
+                        </div>
+                        <div class="url-divider">ou informe a URL da imagem:</div>
+                        <input type="text" id="p-img-url" placeholder="https://exemplo.com/imagem.jpg">
+                        
+                        <div id="img-preview-container" class="img-preview-container hidden">
+                            <p class="preview-title">Pré-visualização:</p>
+                            <img id="img-preview" src="" alt="Pré-visualização" class="img-preview-box">
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="p-available" checked> Disponível para pedidos no cardápio
+                        </label>
+                    </div>
+
+                    <div class="admin-form-btns">
+                        <button type="submit" class="btn-primary" id="btn-save-product">💾 Salvar Produto</button>
+                        <button type="button" id="btn-clear-product" class="btn-secondary">Limpar Formulário</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Lista de Produtos Cadastrados -->
+            <div class="admin-products-list-wrap">
+                <h3>Cardápio Cadastrado</h3>
+                <div class="admin-products-list" id="admin-products-list">
+                    <!-- Itens listados via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

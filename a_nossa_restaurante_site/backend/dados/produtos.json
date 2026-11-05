@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Prato Executivo Frango Grelhado",
+    "description": "Suculento filé de frango grelhado acompanhado de arroz branco, feijão carioca, batata frita crocante e salada fresca.",
+    "allergenInfo": "Contém carne branca • Sem glúten",
+    "tagDestaque": "Mais vendido",
+    "price": 30.00,
+    "category": "Promoção do dia",
+    "image": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "Marmita G - Carne Assada",
+    "description": "Generosa porção de carne assada ao molho ferrugem com mandioca cozida, arroz e feijão.",
+    "allergenInfo": "Contém carne bovina",
+    "tagDestaque": "Promoção",
+    "price": 32.00,
+    "category": "Cardápio normal",
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "Executivo Omelete Especial",
+    "description": "Omelete recheada com queijo, tomate e ervas finas, servida com arroz integral, feijão e legumes no vapor.",
+    "allergenInfo": "Opção Vegetariana • Contém ovos e derivados de leite",
+    "tagDestaque": "Vegetariano",
+    "price": 22.90,
+    "category": "Cardápio normal",
+    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?auto=format&fit=crop&w=600&q=80",
+    "available": true
+  },
+  {
+    "id": 4,
+    "name": "Strogonoff de Cogumelos",
+    "description": "Combinação cremosa de shimeji e paris com molho artesanal, acompanha arroz soltinho e batata palha.",
+    "allergenInfo": "Opção Vegetariana • Contém laticínios",
+    "tagDestaque": "Vegetariano / Especial",
+    "price": 28.50,
+    "category": "Cardápio normal",
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80",
+    "available": true
+  },
+  {
+    "id": 5,
+    "name": "Suco Natural de Laranja 500ml",
+    "description": "Suco de laranja 100% natural, espremido na hora sem adição de água ou açúcar.",
+    "allergenInfo": "Sem glúten • 100% Natural",
+    "tagDestaque": "Especial",
+    "price": 9.00,
+    "category": "Bebidas",
+    "image": "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80",
+    "available": true
+  },
+  {
+    "id": 6,
+    "name": "Pudim de Leite Condensado",
+    "description": "Fatia generosa de pudim tradicional super cremoso com calda de caramelo caseira.",
+    "allergenInfo": "Contém laticínios e ovos",
+    "tagDestaque": "Mais vendido",
+    "price": 10.00,
+    "category": "Sobremesas",
+    "image": "https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?auto=format&fit=crop&w=600&q=80",
+    "available": true
+  }
+]
