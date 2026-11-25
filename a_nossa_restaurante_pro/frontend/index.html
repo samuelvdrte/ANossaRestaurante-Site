@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#e0283f">
+  <title>A Nossa Restaurante - Delivery & Cardápio Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<!-- Ícones -->
+<svg class="sprite" width="0" height="0" aria-hidden="true">
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 11.4a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 7H6"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+</svg>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<!-- ===================== TELA DE LOGIN / CRIAR CONTA ===================== -->
+<section id="tela-auth" class="auth-wrap hidden" aria-label="Acesso ao site">
+  <div class="auth-tools">
+    <button type="button" class="nav-btn" data-acao="contraste"><svg class="ico"><use href="#i-eye"/></svg><span class="lbl">Contraste</span></button>
+    <button type="button" class="nav-btn" data-acao="tema"><svg class="ico"><use href="#i-moon"/></svg><span class="lbl tema-lbl">Escuro</span></button>
+  </div>
+  <div class="auth-card">
+    <aside class="auth-side">
+      <div class="logo-area">
+        <div class="logo-icon">AN</div>
+        <div class="store-info"><h1>A Nossa Restaurante</h1></div>
+      </div>
+      <div>
+        <span class="hero-eyebrow">Sabor caseiro &amp; entrega rápida</span>
+        <h2>Comida de verdade, feita com carinho todos os dias.</h2>
+        <p>Entre na sua conta ou crie uma em segundos para ver o cardápio e fazer seu pedido.</p>
+      </div>
+    </aside>
+
+    <div class="auth-main">
+      <div class="auth-tabs" role="tablist">
+        <button type="button" role="tab" class="auth-tab active" data-auth="login" aria-selected="true">Entrar</button>
+        <button type="button" role="tab" class="auth-tab" data-auth="registrar" aria-selected="false">Criar conta</button>
+      </div>
+
+      <form id="form-login" class="auth-form" novalidate>
+        <h3>Bem-vindo de volta</h3>
+        <p class="modal-sub">Digite seus dados para continuar.</p>
+        <div class="form-group">
+          <label for="login-usuario">Usuário</label>
+          <input id="login-usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+        </div>
+        <div class="form-group">
+          <label for="login-senha">Senha</label>
+          <input id="login-senha" type="password" autocomplete="current-password" required>
+        </div>
+        <p class="auth-erro hidden" role="alert"></p>
+        <button type="submit" class="btn-primary-full">Entrar</button>
+        <p class="auth-troca">Ainda não tem conta? <button type="button" class="btn-link" data-auth="registrar">Criar conta</button></p>
+      </form>
+
+      <form id="form-registrar" class="auth-form hidden" novalidate>
+        <h3>Crie sua conta</h3>
+        <p class="modal-sub">Leva menos de um minuto.</p>
+        <div class="form-group">
+          <label for="reg-nome">Seu nome</label>
+          <input id="reg-nome" autocomplete="name" maxlength="60" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-usuario">Usuário</label>
+          <input id="reg-usuario" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="20" placeholder="ex: maria.silva" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-senha">Senha</label>
+            <input id="reg-senha" type="password" autocomplete="new-password" minlength="6" placeholder="mín. 6 caracteres" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-senha2">Repetir senha</label>
+            <input id="reg-senha2" type="password" autocomplete="new-password" required>
+          </div>
+        </div>
+        <p class="auth-erro hidden" role="alert"></p>
+        <button type="submit" class="btn-primary-full">Criar conta e entrar</button>
+        <p class="auth-troca">Já tem conta? <button type="button" class="btn-link" data-auth="login">Entrar</button></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APLICATIVO (após login) ===================== -->
+<div id="app" class="hidden">
+  <header class="main-header">
+    <div class="header-content">
+      <div class="logo-area">
+        <div class="logo-icon">AN</div>
+        <div class="store-info">
+          <h1>A Nossa Restaurante</h1>
+          <span class="status-badge"><span class="status-dot"></span>Aberto para pedidos <span class="sep">•</span> <span class="entrega">Entrega 30-45 min</span></span>
+        </div>
+      </div>
+      <nav id="header-nav" class="header-nav" aria-label="Menu principal">
+        <button type="button" class="nav-btn" data-acao="contraste" title="Alto contraste"><svg class="ico"><use href="#i-eye"/></svg><span class="lbl">Contraste</span></button>
+        <button type="button" class="nav-btn" data-acao="tema" title="Alternar tema"><svg class="ico"><use href="#i-moon"/></svg><span class="lbl tema-lbl">Escuro</span></button>
+        <!-- O botão Admin só é criado pelo script quando o usuário logado é administrador -->
+        <button type="button" id="btn-usuario" class="nav-btn" data-acao="sair" title="Sair da conta"><svg class="ico"><use href="#i-out"/></svg><span class="lbl" id="nome-usuario">Sair</span></button>
+        <button type="button" id="btn-cart" class="cart-btn" data-acao="abrir-carrinho" aria-label="Abrir carrinho"><svg class="ico"><use href="#i-cart"/></svg><span class="lbl">Carrinho</span> <span id="cart-count">0</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="hero-banner">
+      <span class="hero-eyebrow">Sabor caseiro &amp; entrega rápida</span>
+      <h2>Comida de verdade, feita com carinho todos os dias.</h2>
+      <p>Escolha suas opções favoritas do cardápio ou monte seu prato personalizado em poucos cliques.</p>
+    </section>
+
+    <div class="section-head">
+      <h3>Nosso Cardápio</h3>
+      <span>Selecione uma categoria</span>
+    </div>
+
+    <div class="menu-tabs" role="tablist" id="menu-tabs">
+      <button class="tab-btn active" role="tab" data-categoria="Promoção do dia">🔥 Promoção do dia</button>
+      <button class="tab-btn" role="tab" data-categoria="Cardápio normal">🍛 Cardápio normal</button>
+      <button class="tab-btn" role="tab" data-categoria="Bebidas">🥤 Bebidas</button>
+      <button class="tab-btn" role="tab" data-categoria="Sobremesas">🍰 Sobremesas</button>
+      <button class="tab-btn" role="tab" data-categoria="Monte o seu prato">✨ Monte o seu prato</button>
+    </div>
+
+    <div id="filtros" class="filtros" aria-label="Filtrar pratos">
+      <span class="filtros-rotulo">Filtrar:</span>
+      <button type="button" class="filtro" data-filtro="mais-vendido" aria-pressed="false">🔥 Mais vendido</button>
+      <button type="button" class="filtro" data-filtro="vegetariano" aria-pressed="false">🥗 Vegetariano</button>
+      <button type="button" class="filtro" data-filtro="vegano" aria-pressed="false">🌱 Vegano</button>
+      <button type="button" class="filtro" data-filtro="sem-gluten" aria-pressed="false">✅ Sem glúten</button>
+    </div>
+
+    <div id="products-container" class="products-grid"></div>
+
+    <!-- MONTE O SEU PRATO -->
+    <div id="custom-meal-section" class="custom-meal-card hidden">
+      <div class="custom-header">
+        <div>
+          <span class="badge-custom">Monte sua marmita</span>
+          <h3>Escolha os seus ingredientes favoritos</h3>
+          <p>Monte o seu almoço sob medida. Selecione as opções abaixo:</p>
+        </div>
+        <span id="custom-price-display" class="custom-price">R$ 27,90</span>
+      </div>
+
+      <form id="custom-meal-form" class="custom-form" novalidate>
+        <div class="form-row">
+          <div class="form-group"><label for="custom-arroz">Base de arroz</label>
+            <select id="custom-arroz"><option>Arroz branco soltinho</option><option>Arroz integral caseiro</option></select></div>
+          <div class="form-group"><label for="custom-feijao">Feijão</label>
+            <select id="custom-feijao"><option>Feijão carioca temperado</option><option>Feijão preto bem gordinho</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="custom-proteina">Proteína principal</label>
+            <select id="custom-proteina">
+              <option value="Frango grelhado na chapa" data-selos="carne-frango">Frango grelhado na chapa</option>
+              <option value="Carne assada suculenta" data-selos="carne-bovina">Carne assada suculenta</option>
+              <option value="Filé de peixe empanado" data-extra="6" data-selos="peixe,gluten">Filé de peixe empanado (+R$ 6,00)</option>
+              <option value="Omelete recheada (vegetariano)" data-selos="vegetariano,ovo,lactose">Omelete recheada (vegetariano)</option>
+            </select></div>
+          <div class="form-group"><label for="custom-guarnicao">Guarnição</label>
+            <select id="custom-guarnicao">
+              <option value="Batata frita crocante">Batata frita crocante</option>
+              <option value="Legumes grelhados na manteiga" data-selos="lactose">Legumes grelhados na manteiga</option>
+              <option value="Mandioca frita">Mandioca frita</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="custom-salada">Salada</label>
+            <select id="custom-salada"><option>Salada completa do dia</option><option>Sem salada</option></select></div>
+          <div class="form-group"><label for="custom-extra">Item extra</label>
+            <select id="custom-extra">
+              <option value="Sem extra">Sem extra</option>
+              <option value="Porção extra de proteína" data-extra="8">Porção extra de proteína (+R$ 8,00)</option>
+              <option value="Ovo frito" data-extra="3" data-selos="ovo">Ovo frito (+R$ 3,00)</option>
+            </select></div>
+        </div>
+        <div class="form-group"><label for="custom-obs">Observações especiais</label>
+          <textarea id="custom-obs" maxlength="200" placeholder="Ex: ponto da carne, molho à parte, pouca salada..."></textarea></div>
+        <div id="custom-selos" class="selos" aria-live="polite"></div>
+        <button type="button" class="btn-primary-full" data-acao="add-custom">Adicionar prato personalizado</button>
+      </form>
+    </div>
+
+    <section class="orders-history-section">
+      <div class="section-head"><h3>Seus Pedidos Recentes</h3><span>Repita seus favoritos com um clique</span></div>
+      <div id="orders-history-container" class="orders-history-grid"></div>
+    </section>
+  </main>
+
+  <!-- Área do administrador: só existe no DOM para quem é admin -->
+  <div id="admin-root"></div>
+</div>
+
+<button type="button" id="fab-cart" class="fab-cart" data-acao="abrir-carrinho"><span>Ver carrinho · <b id="fab-qtd">0</b></span><strong id="fab-total">R$ 0,00</strong></button>
+
+<!-- CARRINHO -->
+<div id="cart-modal" class="modal-overlay overlay-side hidden" role="dialog" aria-modal="true" aria-labelledby="cart-titulo">
+  <aside class="cart-sidebar">
+    <div class="cart-header">
+      <h3 id="cart-titulo"><svg class="ico"><use href="#i-cart"/></svg> Meu Carrinho</h3>
+      <button type="button" class="close-btn" data-fechar aria-label="Fechar carrinho"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div id="cart-items-container" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total-row"><span>Total do Pedido:</span><strong id="cart-total-value">R$ 0,00</strong></div>
+      <button type="button" class="btn-primary-full" data-acao="ir-checkout">Próximo Passo: Entrega ➔</button>
+    </div>
+  </aside>
+</div>
+
+<!-- CHECKOUT -->
+<div id="checkout-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checkout-titulo">
+  <div class="modal-card">
+    <h3 id="checkout-titulo">📍 Finalizar pedido</h3>
+    <p class="modal-sub">Informe os dados de entrega. O pedido será enviado pelo WhatsApp.</p>
+    <form id="checkout-form">
+      <div class="form-group"><label for="client-name">Seu nome completo</label><input id="client-name" required maxlength="80" autocomplete="name"></div>
+      <div class="form-group"><label for="client-address">Endereço (rua, nº, bairro, complemento)</label><input id="client-address" required maxlength="200" autocomplete="street-address" placeholder="Ex: Rua das Flores, 123, Centro"></div>
+      <div class="form-group"><label for="client-payment">Forma de pagamento</label>
+        <select id="client-payment" required>
+          <option value="">Selecione uma opção</option>
+          <option value="PIX">PIX (chave enviada no WhatsApp)</option>
+          <option value="Cartão de crédito / débito na entrega">Cartão de crédito / débito na entrega</option>
+          <option value="Dinheiro (levar troco)">Dinheiro (informar troco nas observações)</option>
+        </select></div>
+      <div class="form-group"><label for="client-obs">Observações finais</label><textarea id="client-obs" maxlength="300" placeholder="Ex: troco para R$ 50; deixar na portaria"></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-acao="voltar-carrinho">Voltar</button>
+        <button type="submit" class="btn-primary">Enviar pedido via WhatsApp</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- QUANTIDADE -->
+<div id="quantity-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="qty-nome">
+  <div class="modal-card small-card">
+    <h3 id="qty-nome">Produto</h3>
+    <div id="qty-selos" class="selos center"></div>
+    <p class="modal-sub">Selecione a quantidade desejada:</p>
+    <div class="qty-selector">
+      <button type="button" data-acao="qty-menos" aria-label="Diminuir">−</button>
+      <span id="qty-value" aria-live="polite">1</span>
+      <button type="button" data-acao="qty-mais" aria-label="Aumentar">+</button>
+    </div>
+    <button type="button" class="btn-primary-full" data-acao="confirmar-add">Adicionar ao carrinho</button>
+    <button type="button" class="btn-text" data-fechar>Cancelar</button>
+  </div>
+</div>
+
+<!-- MODELO DO PAINEL ADMIN (só é usado se o usuário for admin) -->
+<template id="tpl-admin">
+  <div id="admin-panel" class="container">
+    <div class="admin-top-bar">
+      <div>
+        <span class="admin-tag">Painel administrativo</span>
+        <h2>Gerenciar Cardápio</h2>
+      </div>
+      <div class="admin-nav-actions">
+        <button type="button" class="btn-secondary" data-acao="admin-voltar">Visitar o Cardápio</button>
+        <button type="button" class="btn-danger-soft" data-acao="sair">Sair Admin</button>
+      </div>
+    </div>
+    <div class="admin-grid-layout">
+      <div class="admin-form-card">
+        <h3 id="admin-form-title">Cadastrar Novo Produto</h3>
+        <form id="product-form" novalidate>
+          <input type="hidden" id="edit-product-id">
+          <div class="form-group"><label for="p-name">Nome do Produto *</label><input id="p-name" required maxlength="80" placeholder="Ex: Bife à Role"></div>
+          <div class="form-group"><label for="p-desc">Descrição *</label><textarea id="p-desc" required maxlength="400" placeholder="Ingredientes e detalhes..."></textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label for="p-price">Preço R$ *</label><input type="number" step="0.01" min="0.01" id="p-price" required placeholder="29,90"></div>
+            <div class="form-group"><label for="p-category">Categoria</label>
+              <select id="p-category"><option>Promoção do dia</option><option>Cardápio normal</option><option>Bebidas</option><option>Sobremesas</option></select></div>
+          </div>
+          <div class="form-group">
+            <label>Selos do prato <small class="dica">(aparecem como widgets no cardápio)</small></label>
+            <div id="p-selos" class="selos-check"></div>
+          </div>
+          <div class="form-group">
+            <label for="p-img-url">URL da Imagem</label>
+            <input id="p-img-url" placeholder="https://...">
+            <div class="file-upload-box">
+              <label for="p-file-input" class="btn-file-label">Enviar arquivo</label>
+              <input type="file" id="p-file-input" accept="image/*" class="file-input-hidden">
+              <span id="file-name-display" class="file-name-text">Nenhum arquivo selecionado</span>
+            </div>
+            <div id="img-preview-container" class="img-preview-container hidden"><img id="img-preview" alt="Pré-visualização" class="img-preview-box"></div>
+          </div>
+          <div class="form-group checkbox-group"><label><input type="checkbox" id="p-available" checked> Disponível para venda</label></div>
+          <div class="admin-form-btns">
+            <button type="submit" class="btn-primary-full" id="btn-save-product">Salvar Produto</button>
+            <button type="button" class="btn-secondary" data-acao="admin-limpar">Limpar</button>
+          </div>
+        </form>
+      </div>
+      <div class="admin-products-list-wrap">
+        <div class="section-head"><h3>Produtos Cadastrados</h3><span id="admin-count">0 itens</span></div>
+        <div class="admin-products-list" id="admin-products-list"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+[
+  {
+    "usuario": "admin",
+    "nome": "Administrador",
+    "papel": "admin",
+    "senha": "scrypt$a4d4752e8a127de6f7efc35dc9e5b9cf$28d9102089054458cd82a94350b4496083cd03309497c1519005835bc378e435bdb57d791bde6d069a5f9d6efab8d1f011526903fced3568481b1bdd37be2e65",
+    "criadoEm": "2026-11-18T21:21:13.367Z"
+  }
+]
