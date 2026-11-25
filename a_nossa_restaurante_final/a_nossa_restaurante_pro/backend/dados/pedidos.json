@@ -1,0 +1,190 @@
+[
+  {
+    "id": 1795048766874,
+    "date": "18/11/2026, 21:39:26",
+    "usuario": "admin",
+    "name": "Administrador",
+    "address": "Alameda Alemanha, 35",
+    "payment": "PIX",
+    "obs": "",
+    "total": 30.9,
+    "items": [
+      {
+        "id": "custom_1795048727905",
+        "name": "Marmita Personalizada",
+        "details": "Arroz integral caseiro | Feijão carioca temperado | Frango grelhado na chapa | Batata frita crocante | Salada completa do dia | Extra: Ovo frito | Obs: Ponto da carne bem passado",
+        "price": 30.9,
+        "quantity": 1,
+        "isCustom": true
+      }
+    ]
+  },
+  {
+    "id": 1795046302140,
+    "date": "18/11/2026, 20:58:22",
+    "usuario": "admin",
+    "name": "Administrador",
+    "address": "Rua Tapajós, 215",
+    "payment": "PIX",
+    "obs": "",
+    "total": 26.9,
+    "items": [
+      {
+        "id": 1,
+        "name": "Prato Executivo Frango Grelhado",
+        "details": "Filé de frango grelhado na chapa com arroz branco, feijão carioca, batata frita e salada fresca.",
+        "price": 26.9,
+        "quantity": 1,
+        "isCustom": false
+      }
+    ]
+  },
+  {
+    "id": 1795045737045,
+    "date": "18/11/2026, 20:48:57",
+    "usuario": "admin",
+    "name": "Administrador",
+    "address": "Rua Tapajós, 215",
+    "payment": "Cartão de crédito / débito na entrega",
+    "obs": "",
+    "total": 31.9,
+    "items": [
+      {
+        "id": 3,
+        "name": "Parmegiana de Frango",
+        "details": "Filé de frango empanado coberto com molho de tomate e queijo gratinado, arroz e batata frita.",
+        "price": 31.9,
+        "quantity": 1,
+        "isCustom": false
+      }
+    ]
+  },
+  {
+    "id": 1795044773795,
+    "date": "18/11/2026, 20:32:53",
+    "usuario": "admin",
+    "name": "Administrador",
+    "address": "Rua Tapajós, 215",
+    "payment": "Cartão de crédito / débito na entrega",
+    "obs": "",
+    "total": 30.9,
+    "items": [
+      {
+        "id": "custom_1795044747380",
+        "name": "Marmita Personalizada",
+        "details": "Arroz integral caseiro | Feijão carioca temperado | Frango grelhado na chapa | Batata frita crocante | Salada completa do dia | Extra: Ovo frito | Obs: Ponto da carne bem passado",
+        "price": 30.9,
+        "quantity": 1,
+        "isCustom": true
+      }
+    ]
+  },
+  {
+    "id": 1795042997571,
+    "date": "18/11/2026, 20:03:17",
+    "usuario": "admin",
+    "name": "Administrador",
+    "address": "Rua Tapajós, 215",
+    "payment": "Cartão de crédito / débito na entrega",
+    "obs": "sem salada",
+    "total": 36.9,
+    "items": [
+      {
+        "id": 1,
+        "name": "Prato Executivo Frango Grelhado",
+        "details": "Filé de frango grelhado na chapa com arroz branco, feijão carioca, batata frita e salada fresca.",
+        "price": 26.9,
+        "quantity": 1,
+        "isCustom": false
+      },
+      {
+        "id": 17,
+        "name": "Pudim de Leite Condensado",
+        "details": "Fatia generosa de pudim cremoso com calda de caramelo caseira.",
+        "price": 10,
+        "quantity": 1,
+        "isCustom": false
+      }
+    ]
+  },
+  {
+    "id": 1795042155867,
+    "date": "18/11/2026, 19:49:15",
+    "usuario": "admin",
+    "name": "Administrador",
+    "address": "Alameda Alemanha, 35",
+    "payment": "PIX",
+    "obs": "",
+    "total": 27.9,
+    "items": [
+      {
+        "id": "custom_1795042135004",
+        "name": "Marmita Personalizada",
+        "details": "Arroz branco soltinho | Feijão carioca temperado | Frango grelhado na chapa | Batata frita crocante | Salada completa do dia | Extra: Sem extra",
+        "price": 27.9,
+        "quantity": 1,
+        "isCustom": true
+      }
+    ]
+  },
+  {
+    "id": 1795039109698,
+    "date": "18/11/2026, 18:58:29",
+    "usuario": "admin",
+    "name": "MARIA APARECIDA VIEIRA DOS SANTOS DUARTE",
+    "address": "Rua Tapajós, 215",
+    "payment": "PIX",
+    "obs": "",
+    "total": 29.9,
+    "items": [
+      {
+        "id": 2,
+        "name": "Strogonoff de Frango Especial",
+        "details": "Frango em cubos no molho cremoso com champignon, arroz branco e batata palha crocante.",
+        "price": 29.9,
+        "quantity": 1,
+        "isCustom": false
+      }
+    ]
+  },
+  {
+    "id": 1795039092829,
+    "date": "18/11/2026, 18:58:12",
+    "usuario": "admin",
+    "name": "Administrador",
+    "address": "Rua Tapajós, 215",
+    "payment": "Cartão de crédito / débito na entrega",
+    "obs": "",
+    "total": 27.9,
+    "items": [
+      {
+        "id": 6,
+        "name": "Picadinho de Carne Caseiro",
+        "details": "Carne bovina em cubos ao molho encorpado, com arroz, feijão tropeiro e ovo frito.",
+        "price": 27.9,
+        "quantity": 1,
+        "isCustom": false
+      }
+    ]
+  },
+  {
+    "id": 1795038794100,
+    "date": "18/11/2026, 18:53:14",
+    "usuario": "admin",
+    "name": "MARIA APARECIDA VIEIRA DOS SANTOS DUARTE",
+    "address": "Rua Tapajós, 215",
+    "payment": "PIX",
+    "obs": "",
+    "total": 69.8,
+    "items": [
+      {
+        "id": 5,
+        "name": "Feijoada Completa Individual",
+        "details": "Feijão preto com carnes selecionadas, arroz, couve refogada, farofa crocante e laranja.",
+        "price": 34.9,
+        "quantity": 2,
+        "isCustom": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,61 @@
+==================================================
+A NOSSA RESTAURANTE - DELIVERY & ADMIN  (v2)
+==================================================
+
+COMO RODAR (sem instalar nada, só precisa do Node.js 18 ou superior):
+
+   $ cd backend
+   $ npm start
+
+   Abra no navegador:  http://localhost:3000
+   (o próprio servidor entrega o site e a API juntos)
+
+   Testar no celular: com o PC e o celular na mesma rede Wi-Fi, abra
+   http://IP-DO-SEU-PC:3000  (para liberar só o seu PC: HOST=127.0.0.1 npm start)
+
+LOGIN
+- Ao abrir o site pela primeira vez aparece a tela de Entrar / Criar conta.
+- Contas criadas pelo site são sempre de CLIENTE.
+- Administrador (identificado automaticamente no login):
+      usuário: admin
+      senha:   12345
+  Só o admin vê o botão "Admin" e o painel de gerenciamento do cardápio.
+  Para clientes, o botão e o painel nem existem na página, e a API recusa
+  (erro 403) qualquer tentativa de criar/editar/excluir produtos.
+- IMPORTANTE: 12345 é uma senha fraca. Antes de publicar na internet, defina
+  outra na primeira execução:  ADMIN_SENHA="sua-senha" npm start
+  (vale só enquanto não existir backend/dados/usuarios.json; para trocar
+   depois, apague esse arquivo e inicie de novo).
+
+SELOS (WIDGETS) DOS PRATOS
+- Cada prato mostra selos: carne bovina / frango / suína, peixe, vegetariano,
+  vegano, sem glúten, contém glúten, contém lactose, contém ovo, picante.
+- "Mais vendido" é automático: o prato com mais unidades vendidas em cada
+  categoria. A contagem sobe a cada pedido finalizado.
+- Há filtros no cardápio (Mais vendido, Vegetariano, Vegano, Sem glúten).
+- No Admin, os selos são marcados por caixinhas ao cadastrar/editar o prato.
+- Confira os selos de alergênicos com a cozinha: eles devem refletir como
+  cada prato é realmente preparado.
+
+API (JSON; envie  Authorization: Bearer <token>  exceto login/registrar)
+  GET    /api/saude
+  POST   /api/auth/registrar   {nome, usuario, senha}
+  POST   /api/auth/login       {usuario, senha}   -> {token, usuario:{papel}}
+  GET    /api/auth/eu
+  GET    /api/produtos         (admin vê também indisponíveis e as vendas)
+  POST   /api/produtos         (admin)
+  PUT    /api/produtos/:id     (admin)
+  DELETE /api/produtos/:id     (admin)
+  GET    /api/pedidos          (cliente: os seus; admin: todos)
+  POST   /api/pedidos          (o servidor recalcula os preços pelo cardápio)
+
+ESTRUTURA
+  frontend/  index.html, estilos.css, script.js
+  backend/   server.js, rotas/, lib/, dados/ (produtos, pedidos, usuarios)
+
+OBSERVAÇÕES
+- Número do WhatsApp: edite WHATSAPP no topo de frontend/script.js.
+- Fotos dos pratos vêm de URLs externas; se alguma não carregar, o site
+  mostra automaticamente um ícone do prato. Troque pela foto real no Admin.
+- Backend sem dependências externas (usa só módulos nativos do Node).
+==================================================

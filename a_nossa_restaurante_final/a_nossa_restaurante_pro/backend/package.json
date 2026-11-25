@@ -1,0 +1,8 @@
+{
+  "name": "a-nossa-restaurante-backend",
+  "version": "2.0.0",
+  "description": "API do A Nossa Restaurante (login, cardápio e pedidos) - sem dependências externas",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "dev": "node --watch server.js" },
+  "engines": { "node": ">=18" }
+}
